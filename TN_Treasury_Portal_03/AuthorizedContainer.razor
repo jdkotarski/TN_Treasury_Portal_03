@@ -1,0 +1,30 @@
+﻿@inject IJSRuntime JSRuntime
+
+
+<button class="btn btn-primary" @onclick="DisplayAddContentForm">
+    @if (AddContentFormHidden)
+    {
+        <span>Add FAQ Content...</span>
+    }
+    else
+    {
+        <span>Done Adding Content</span>
+    }
+</button>
+<div id="addContentFormContainer" hidden="@AddContentFormHidden">
+    Hello World!
+</div>
+@code {
+    /*Used this to insert new innerHTML
+         * private async Task DisplayAddContentForm()
+            {
+            await JSRuntime.InvokeVoidAsync("insertAddContentForm");
+    }*/
+    // Reveals existing form when button is clicked
+    private bool AddContentFormHidden { get; set; } = true;
+    private void DisplayAddContentForm()
+    {
+        AddContentFormHidden = !AddContentFormHidden;
+    }
+
+}

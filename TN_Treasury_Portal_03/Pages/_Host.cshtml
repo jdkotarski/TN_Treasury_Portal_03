@@ -1,0 +1,13 @@
+﻿@page "/"
+@namespace TN_Treasury_Portal_03.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+<component type="typeof(App)" render-mode="ServerPrerendered" />
+<script>
+    function insertAddContentForm() {
+        document.getElementById("addContentFormContainer").innerHTML = "Hello world!";
+    }
+</script>
