@@ -19,9 +19,9 @@ namespace TN_Treasury_Portal_03.Data
         {
             Id += 1;
             //Formatting components to be added onto the page
-            string TitleHTML = "<h3>" + Title + "</h3><hr><br>";
+            string TitleHTML = "<h3>" + Title + "</h3><br>";
             string DescriptionHTML = "<p>" + Description + "</p><br>";
-            string LinkHTML = "<a href=&quot; " + Link + "&quot;></a>";
+            string LinkHTML = "<a href= " + Link + ">View Link Here</a><hr><br>";
             
             return "<div id=FAQ" + Id + ">" + TitleHTML + DescriptionHTML + LinkHTML;
         }
