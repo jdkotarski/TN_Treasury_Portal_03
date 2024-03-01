@@ -10,4 +10,9 @@
     function insertAddContentForm() {
         document.getElementById("addContentFormContainer").innerHTML = "Hello world!";
     }
+    function insertFAQ(qToString) {
+        var existingContent = document.getElementById("FAQContainer").innerHTML;
+        var newContent = existingContent + qToString;
+        document.getElementById("FAQContainer").innerHTML = newContent;
+    }
 </script>
