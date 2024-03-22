@@ -1,0 +1,24 @@
+﻿@page "/employeeInfo"
+@attribute [Authorize]
+
+<PageTitle>Employee Information</PageTitle>
+
+<h1>TN Department of Treasury - Employee Information</h1>
+<hr />
+<br />
+
+<!--TrainingItems will go here after being created-->
+<div id="TrainingItemContainer">
+    
+</div>
+<br />
+<!--Allows posting TrainingItems-->
+<AddTrainingItemContainer />
+
+
+<style>
+    .TrainingItem {
+        border: 2px solid black;
+        padding: 15px;
+    }
+</style>

@@ -1,0 +1,25 @@
+﻿@inject IJSRuntime JSRuntime
+
+<!--Shows or hides the form for adding TrainingItems to the page-->
+<button class="btn btn-primary" @onclick="DisplayAddTrainingItemForm">
+    @if (AddTrainingItemFormHidden)
+    {
+        <span>Add A Training Item...</span>
+    }
+    else
+    {
+        <span>Done Adding Content</span>
+    }
+</button>
+<div id="addTrainingItemFormContainer" hidden="@AddTrainingItemFormHidden">
+    <AddTrainingItemForm></AddTrainingItemForm>
+</div>
+@code {
+    // Reveals existing form when button is clicked
+    private bool AddTrainingItemFormHidden { get; set; } = true;
+    private void DisplayAddTrainingItemForm()
+    {
+        AddTrainingItemFormHidden = !AddTrainingItemFormHidden;
+    }
+
+}

@@ -7,12 +7,20 @@
 
 <component type="typeof(App)" render-mode="ServerPrerendered" />
 <script>
+    //Old dummy function, used only for initial testing (I'm scared to remove it yet lol)
     function insertAddContentForm() {
         document.getElementById("addContentFormContainer").innerHTML = "Hello world!";
     }
+    // Takes content already in FAQContainer and adds new FAQ element
     function insertFAQ(qToString) {
         var existingContent = document.getElementById("FAQContainer").innerHTML;
         var newContent = existingContent + qToString;
         document.getElementById("FAQContainer").innerHTML = newContent;
+    }
+    // Takes content already in TrainingItemContainer and adds new TrainingItem element
+    function insertTrainingItem(qToString) {
+        var existingContent = document.getElementById("TrainingItemContainer").innerHTML;
+        var newContent = existingContent + qToString;
+        document.getElementById("TrainingItemContainer").innerHTML = newContent;
     }
 </script>

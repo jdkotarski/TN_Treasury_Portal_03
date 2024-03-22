@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>TN Treasury Portal</PageTitle>
 
 <h1>TN Department of Treasury</h1>
 <hr />
@@ -12,7 +12,11 @@
 </div>
 <br />
 <!--Only appears to authorized users, will allow them to post FAQ content-->
-<AuthorizedContainer/>
+<AuthorizeView>
+    <AuthorizedContainer />
+</AuthorizeView>
+
+
 <style>
     .FAQ {
         border: 2px solid black;

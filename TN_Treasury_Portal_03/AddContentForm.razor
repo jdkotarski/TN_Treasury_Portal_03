@@ -2,10 +2,12 @@
 @using TN_Treasury_Portal_03.Data
 <hr />
 <br />
+<!--Form that allows the creation of a new FAQ element-->
 <h3>Add FAQs</h3>
 
 <EditForm Model="@q" OnValidSubmit="insertFAQ">
     <table class="table">
+        <!--Note: no field for Id, since Id is automatically created and incremented by FAQ class-->
         <tr>
             <td>FAQ Title:</td>
             <td><InputText id="faqTitle" @bind-Value="q.Title"></InputText></td>
