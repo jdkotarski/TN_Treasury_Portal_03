@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
 using TN_Treasury_Portal_03.Data;
+using TN_Treasury_Portal_03.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
    .AddNegotiate();
 
+// Adding the connection to the SQL database
+builder.Services.AddDbContext<TnTreasuryPortalContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("TnTreasuryPortal")));
 builder.Services.AddAuthorization(options =>
 {
     // By default, all incoming requests will be authorized according to the default policy.
