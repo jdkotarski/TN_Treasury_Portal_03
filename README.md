@@ -3,8 +3,12 @@ Web Portal for TN Department of Treasury<br>
 Prototype<br>
 <br>
 Functionality<br>
+-Completed<br>
+  ->Separate pages for public user and employee<br>
+  ->Connection to MS SQL Server<br>
+  ->Read and display items from database<br>
 -In progress<br>
-  ->form for adding new content, which is only visible to authorized users<br>
+  ->Adding database-connected functionality to content creation form (SQL INSERT)<br>
+  ->Adding database-connected functionality to FAQ and TrainingItem HTML elements (SQL UPDATE and DELETE)<br>
 -To do<br>
-  ->Make user-added content available to all users<br>
   ->Style to match TN Treasury aesthetic guidelines<br>
