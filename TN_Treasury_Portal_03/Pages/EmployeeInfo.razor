@@ -1,5 +1,7 @@
 ﻿@page "/employeeInfo"
 @attribute [Authorize]
+@using Models
+@inject TrainingItemService TrainingItemsService
 
 <PageTitle>Employee Information</PageTitle>
 
@@ -9,16 +11,36 @@
 
 <!--TrainingItems will go here after being created-->
 <div id="TrainingItemContainer">
-    
+    @foreach (var trainingItem in trainingItems)
+    {
+        <div class="TrainingItem">
+            <h3>@trainingItem.Title</h3>
+            <p>@trainingItem.Description</p>
+            <a href="@trainingItem.Link">View Link Here</a>
+        </div>
+
+    }
 </div>
 <br />
 <!--Allows posting TrainingItems-->
 <AddTrainingItemContainer />
 
-
+<!--Simple CSS section-->
 <style>
     .TrainingItem {
         border: 2px solid black;
         padding: 15px;
     }
 </style>
+
+<!--C# code section-->
+@code {
+    TrainingItem[] trainingItems;
+
+    protected override async Task OnInitializedAsync()
+    {
+        TnTreasuryPortalContext context = new TnTreasuryPortalContext();
+        TrainingItemService service = new TrainingItemService(context);
+        trainingItems = await service.ReadTrainingItem();
+    }
+}

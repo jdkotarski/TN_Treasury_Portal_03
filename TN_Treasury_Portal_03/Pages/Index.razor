@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using Models
+@inject FaqService FaqsService
 
 <PageTitle>TN Treasury Portal</PageTitle>
 
@@ -8,7 +10,15 @@
 
 <!--FAQs will go here after being created-->
 <div id="FAQContainer">
-    
+    @foreach (var faq in faqs)
+    {
+        <div class="FAQ">
+            <h3>@faq.Title</h3>
+            <p>@faq.Description</p>
+            <a href="@faq.Link">View Link Here</a>
+        </div>
+        
+    }
 </div>
 <br />
 <!--Only appears to authorized users, will allow them to post FAQ content-->
@@ -16,10 +26,22 @@
     <AuthorizedContainer />
 </AuthorizeView>
 
-
+<!--Simple CSS section-->
 <style>
     .FAQ {
         border: 2px solid black;
         padding: 15px;
     }
 </style>
+
+<!--C# code section-->
+@code {
+    Faq[] faqs;
+
+    protected override async Task OnInitializedAsync()
+    {
+        TnTreasuryPortalContext context = new TnTreasuryPortalContext();
+        FaqService service = new FaqService(context);
+        faqs = await service.ReadFaq();
+    }
+}

@@ -10,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
    .AddNegotiate();
+builder.Services.AddTransient<FaqService>();
+builder.Services.AddTransient<TrainingItemService>();
 
 // Adding the connection to the SQL database
 builder.Services.AddDbContext<TnTreasuryPortalContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("TnTreasuryPortal")));

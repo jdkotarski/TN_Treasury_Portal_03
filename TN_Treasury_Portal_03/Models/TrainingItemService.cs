@@ -10,6 +10,7 @@ namespace TN_Treasury_Portal_03.Models
         {
             _context = context;
         }
+        // Creates TrainingItem object in database with given user input
         public async void CreateTrainingItem(string NewTitle, string NewDescription, string NewLink)
         {
             SqlParameter paramTitle = new SqlParameter("@NewTitle", NewTitle);
@@ -20,6 +21,14 @@ namespace TN_Treasury_Portal_03.Models
 
             _context.TrainingItems.FromSqlRaw("Execute dbo.CreateTrainingItem @NewTitle,@NewDescription,@NewLink", paramTitle, paramDescription, paramLink);
         }
+        // Retrieves all TrainingItem object titles, descriptions, and links from database
+        public async Task<TrainingItem[]> ReadTrainingItem()
+        {
+            TrainingItem[] TrainingItemObjects;
+            TrainingItemObjects = _context.TrainingItems.FromSqlRaw("Execute dbo.ReadTrainingItem").ToArray();
+            return TrainingItemObjects;
+        }
+        // Updates TrainingItem object in database with given user input
         public async void UpdateTrainingItem(int TargetId, string NewTitle, string NewDescription, string NewLink)
         {
             SqlParameter paramId = new SqlParameter("@TargetId", TargetId);
@@ -32,6 +41,7 @@ namespace TN_Treasury_Portal_03.Models
 
             _context.TrainingItems.FromSqlRaw("Execute dbo.EditTrainingItem @TargetId,@NewTitle,@NewDescription,@NewLink", paramId, paramTitle, paramDescription, paramLink);
         }
+        // Deletes specified TrainingItem object from database
         public async void DeleteTrainingItem(int TargetId)
         {
             SqlParameter paramId = new SqlParameter("@TargetId", TargetId);
