@@ -7,8 +7,8 @@ Functionality<br>
   ->Separate pages for public user and employee<br>
   ->Connection to MS SQL Server<br>
   ->Read and display items from database<br>
+  ->Delete items from database<br>
 -In progress<br>
-  ->Adding database-connected functionality to content creation form (SQL INSERT)<br>
-  ->Adding database-connected functionality to FAQ and TrainingItem HTML elements (SQL UPDATE and DELETE)<br>
+  ->Adding database-connected functionality to FAQ and TrainingItem HTML elements (SQL UPDATE)<br>
 -To do<br>
   ->Style to match TN Treasury aesthetic guidelines<br>
