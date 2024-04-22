@@ -11,12 +11,16 @@
 
 <!--TrainingItems will go here after being created-->
 <div id="TrainingItemContainer">
-    @foreach (var trainingItem in trainingItems)
+    @foreach (TrainingItem trainingItem in trainingItems)
     {
         <div class="TrainingItem">
             <h3>@trainingItem.Title</h3>
             <p>@trainingItem.Description</p>
             <a href="@trainingItem.Link">View Link Here</a>
+            <br /><br />
+            <AuthorizeView>
+                <input type="button" class="btn btn-primary" value="Delete this Training Item" @onclick="() => DeleteTrainingItem(trainingItem)" />
+            </AuthorizeView>
         </div>
 
     }
@@ -41,6 +45,14 @@
     {
         TnTreasuryPortalContext context = new TnTreasuryPortalContext();
         TrainingItemService service = new TrainingItemService(context);
+        trainingItems = await service.ReadTrainingItem();
+    }
+    async Task DeleteTrainingItem(TrainingItem TargetTrainingItem)
+    {
+        int? TargetId = TargetTrainingItem.Id;
+        TnTreasuryPortalContext context = new TnTreasuryPortalContext();
+        TrainingItemService service = new TrainingItemService(context);
+        await service.DeleteTrainingItem(TargetId);
         trainingItems = await service.ReadTrainingItem();
     }
 }

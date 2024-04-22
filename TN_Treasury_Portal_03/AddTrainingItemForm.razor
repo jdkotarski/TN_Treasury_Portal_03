@@ -1,38 +1,47 @@
-﻿@inject IJSRuntime JSRuntime
-@using TN_Treasury_Portal_03.Data
+﻿@using Models
+@inject TrainingItemService TrainingItemsService
 <hr />
 <br />
 <!--Form that allows the creation of a new TrainingItem element-->
 <h3>Add Training Items</h3>
 
-<EditForm Model="@q" OnValidSubmit="insertTrainingItem">
-    <table class="table">
-        <!--Note: no field for Id, since Id is automatically created and incremented by TrainingItem class-->
-        <tr>
-            <td>TrainingItem Title:</td>
-            <td><InputText id="TrainingItemTitle" @bind-Value="q.Title"></InputText></td>
-        </tr>
-        <tr>
-            <td>TrainingItem Description:</td>
-            <td><InputTextArea id="TrainingItemDescription" @bind-Value="q.Description"></InputTextArea></td>
-        </tr>
-        <tr>
-            <td>TrainingItem Link (Optional):</td>
-            <td><InputText id="TrainingItemLink" @bind-Value="q.Link"></InputText></td>
-        </tr>
-        <tr>
-            <td><button type="submit">Submit</button></td>
-        </tr>
-    </table>
-    
-</EditForm>
+<table class="table">
+    <tr>
+        <td>Title:</td>
+        <td>
+            <input type="text" @bind-value="@NewTitle" />
+        </td>
+    </tr>
+    <tr>
+        <td>Description:</td>
+        <td>
+            <input type="text" @bind-value="@NewDescription" />
+        </td>
+    </tr>
+    <tr>
+        <td>Link:</td>
+        <td>
+            <input type="text" @bind-value="@NewLink" />
+        </td>
+    </tr>
+    <tr>
+        <input type="button" class="btn btn-primary" value="Add Training Item" @onclick="CreateTrainingItem" />
+    </tr>
+</table>
 
 @code {
-    //Creates a new TrainingItem object that the user can fill with content
-    private TrainingItem q = new TrainingItem();
-    private async Task insertTrainingItem()
+    //Creates a new FAQ object that the user can fill with content
+    string NewTitle = "";
+    string NewDescription = "";
+    string NewLink = "";
+
+    async Task CreateTrainingItem()
     {
-        string qToString = q.ToString();
-        await JSRuntime.InvokeVoidAsync("insertTrainingItem", qToString);
+        TnTreasuryPortalContext context = new TnTreasuryPortalContext();
+        TrainingItemService service = new TrainingItemService(context);
+        await service.CreateTrainingItem(NewTitle, NewDescription, NewLink);
+        NewTitle = "";
+        NewDescription = "";
+        NewLink = "";
     }
 }

@@ -1,38 +1,47 @@
-﻿@inject IJSRuntime JSRuntime
-@using TN_Treasury_Portal_03.Data
+﻿@using Models
+@inject FaqService FaqsService
 <hr />
 <br />
 <!--Form that allows the creation of a new FAQ element-->
 <h3>Add FAQs</h3>
 
-<EditForm Model="@q" OnValidSubmit="insertFAQ">
-    <table class="table">
-        <!--Note: no field for Id, since Id is automatically created and incremented by FAQ class-->
-        <tr>
-            <td>FAQ Title:</td>
-            <td><InputText id="faqTitle" @bind-Value="q.Title"></InputText></td>
-        </tr>
-        <tr>
-            <td>FAQ Description:</td>
-            <td><InputTextArea id="faqDescription" @bind-Value="q.Description"></InputTextArea></td>
-        </tr>
-        <tr>
-            <td>FAQ Link (Optional):</td>
-            <td><InputText id="faqLink" @bind-Value="q.Link"></InputText></td>
-        </tr>
-        <tr>
-            <td><button type="submit">Submit</button></td>
-        </tr>
-    </table>
-    
-</EditForm>
+<table class="table">
+    <tr>
+        <td>Title:</td>
+        <td>
+            <input type="text" @bind-value="@NewTitle" />
+        </td>
+    </tr>
+    <tr>
+        <td>Description:</td>
+        <td>
+            <input type="text" @bind-value="@NewDescription" />
+        </td>
+    </tr>
+    <tr>
+        <td>Link:</td>
+        <td>
+            <input type="text" @bind-value="@NewLink" />
+        </td>
+    </tr>
+    <tr>
+        <input type="button" class="btn btn-primary" value="Add FAQ Item" @onclick="CreateFaq" />
+    </tr>
+</table>
 
 @code {
     //Creates a new FAQ object that the user can fill with content
-    private FAQ q = new FAQ();
-    private async Task insertFAQ()
+    string NewTitle = "";
+    string NewDescription = "";
+    string NewLink = "";
+
+    async Task CreateFaq()
     {
-        string qToString = q.ToString();
-        await JSRuntime.InvokeVoidAsync("insertFAQ", qToString);
+        TnTreasuryPortalContext context = new TnTreasuryPortalContext();
+        FaqService service = new FaqService(context);
+        await service.CreateFaq(NewTitle, NewDescription, NewLink);
+        NewTitle = "";
+        NewDescription = "";
+        NewLink = "";
     }
 }

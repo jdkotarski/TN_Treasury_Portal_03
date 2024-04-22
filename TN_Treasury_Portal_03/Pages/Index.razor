@@ -10,12 +10,16 @@
 
 <!--FAQs will go here after being created-->
 <div id="FAQContainer">
-    @foreach (var faq in faqs)
+    @foreach (Faq faq in faqs)
     {
         <div class="FAQ">
             <h3>@faq.Title</h3>
             <p>@faq.Description</p>
             <a href="@faq.Link">View Link Here</a>
+            <br /><br />
+            <AuthorizeView>
+                <input type="button" class="btn btn-primary" value="Delete this FAQ Item" @onclick="() => DeleteFaq(faq)" />
+            </AuthorizeView>
         </div>
         
     }
@@ -42,6 +46,14 @@
     {
         TnTreasuryPortalContext context = new TnTreasuryPortalContext();
         FaqService service = new FaqService(context);
+        faqs = await service.ReadFaq();
+    }
+    async Task DeleteFaq(Faq TargetFaq)
+    {
+        int? TargetId = TargetFaq.Id;
+        TnTreasuryPortalContext context = new TnTreasuryPortalContext();
+        FaqService service = new FaqService(context);
+        await service.DeleteFaq(TargetId);
         faqs = await service.ReadFaq();
     }
 }
